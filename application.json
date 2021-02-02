@@ -1,0 +1,16 @@
+{
+ "sensors": {
+  "wind": {
+   "active": true,
+   "timeout": 2000,
+   "path": "COM2",
+   "openOptions": {
+    "autoOpen": false,
+    "baudRate": 9600,
+    "dataBits": 8,
+    "stopBits": 1,
+    "parity": "none"
+   }
+  }
+ }
+}

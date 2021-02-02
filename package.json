@@ -1,0 +1,63 @@
+{
+  "name": "weather-sensors-logger",
+  "version": "0.1.0",
+  "description": "weather data logger and server",
+  "author": "Amine Kaddache",
+  "license": "MIT",
+  "scripts": {
+    "debug-webstorm": "node %NODE_DEBUG_OPTION% index.js",
+    "start": "npm run build && npm run watch",
+    "build": "npm run build-ts",
+    "prepare-build": "node ./build/copy-node-files.js",
+    "pkg": "npm run build && pkg . && npm run prepare-build",
+    "serve": "nodemon dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "debug": "npm run build && npm run watch-debug",
+    "serve-debug": "nodemon --inspect dist/server.js",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
+  },
+  "dependencies": {
+    "moment": "^2.20.1",
+    "rxjs": "^5.5.6",
+    "serialport": "^6.1.0",
+    "socket.io": "^2.0.4",
+    "sqlite3": "^3.1.13",
+    "typescript": "^2.7.1",
+    "winston": "^3.0.0-rc1"
+  },
+  "devDependencies": {
+    "@types/node": "^8.9.2",
+    "@types/serialport": "^6.0.1",
+    "@types/socket.io": "^1.4.31",
+    "@types/sqlite3": "^3.1.1",
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.14.12",
+    "ts-loader": "^3.5.0",
+    "ts-node": "^4.1.0",
+    "webpack": "^3.11.0"
+  },
+  "pkg": {
+    "scripts": [
+      "./node_modules/logform/combine.js",
+      "./node_modules/logform/json.js",
+      "./node_modules/logform/levels.js",
+      "./node_modules/logform/format.js",
+      "./node_modules/logform/label.js",
+      "./node_modules/logform/printf.js",
+      "./node_modules/logform/splat.js",
+      "./node_modules/logform/timestamp.js"
+    ],
+    "assets": [
+      "views/**/*"
+    ],
+    "targets": [
+      "node8"
+    ],
+    "output": [
+      "./dist/logger.exe"
+    ]
+  },
+  "bin": "dist/server.js"
+}
